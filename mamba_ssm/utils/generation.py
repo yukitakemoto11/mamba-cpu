@@ -195,8 +195,8 @@ def decode(
             return True
         return False
 
-    start = torch.cuda.Event(enable_timing=enable_timing)
-    end = torch.cuda.Event(enable_timing=enable_timing)
+    #start = torch.cuda.Event(enable_timing=enable_timing)
+    #end = torch.cuda.Event(enable_timing=enable_timing)
 
     if enable_timing:
         start.record()

@@ -491,7 +491,7 @@ class RMSNorm(torch.nn.Module):
         torch.nn.init.ones_(self.weight)
 
     def forward(self, x, residual=None, prenorm=False, residual_in_fp32=False):
-        return rms_norm_fn(
+        return rms_norm_ref(
             x,
             self.weight,
             self.bias,

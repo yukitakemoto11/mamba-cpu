@@ -19,10 +19,7 @@ try:
 except ImportError:
     selective_state_update = None
 
-try:
-    from mamba_ssm.ops.triton.layernorm import RMSNorm, layer_norm_fn, rms_norm_fn
-except ImportError:
-    RMSNorm, layer_norm_fn, rms_norm_fn = None, None, None
+from mamba_ssm.ops.layernorm import RMSNorm, layer_norm_fn, rms_norm_fn
 
 
 class Mamba(nn.Module):
@@ -340,7 +337,7 @@ class Block(nn.Module):
                 self.norm.bias,
                 residual=residual,
                 prenorm=True,
-                residual_in_fp32=self.residual_in_fp32,
+                #residual_in_fp32=self.residual_in_fp32,
                 eps=self.norm.eps,
             )
         hidden_states = self.mixer(hidden_states, inference_params=inference_params)

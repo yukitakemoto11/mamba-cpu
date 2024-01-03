@@ -15,10 +15,7 @@ from mamba_ssm.modules.mamba_simple import Mamba, Block
 from mamba_ssm.utils.generation import GenerationMixin
 from mamba_ssm.utils.hf import load_config_hf, load_state_dict_hf
 
-try:
-    from mamba_ssm.ops.triton.layernorm import RMSNorm, layer_norm_fn, rms_norm_fn
-except ImportError:
-    RMSNorm, layer_norm_fn, rms_norm_fn = None, None, None
+from mamba_ssm.ops.layernorm import RMSNorm, layer_norm_fn, rms_norm_fn
 
 
 def create_block(
@@ -121,7 +118,7 @@ class MixerModel(nn.Module):
                     ssm_cfg=ssm_cfg,
                     norm_epsilon=norm_epsilon,
                     rms_norm=rms_norm,
-                    residual_in_fp32=residual_in_fp32,
+                    #residual_in_fp32=residual_in_fp32,
                     fused_add_norm=fused_add_norm,
                     layer_idx=i,
                     **factory_kwargs,
@@ -168,7 +165,7 @@ class MixerModel(nn.Module):
                 eps=self.norm_f.eps,
                 residual=residual,
                 prenorm=False,
-                residual_in_fp32=self.residual_in_fp32,
+                #residual_in_fp32=self.residual_in_fp32,
             )
         return hidden_states
 

@@ -26,9 +26,9 @@ parser.add_argument("--repetition-penalty", type=float, default=1.0)
 parser.add_argument("--batch", type=int, default=1)
 args = parser.parse_args()
 
-repeats = 3
+repeats = 1
 device = "cpu"
-dtype = torch.float16
+dtype = torch.float32
 
 print(f"Loading model {args.model_name}")
 is_mamba = args.model_name.startswith("state-spaces/mamba-")
@@ -55,7 +55,7 @@ if is_mamba:
     fn = lambda: model.generate(
         input_ids=input_ids,
         max_length=max_length,
-        cg=True,
+        cg=False,
         return_dict_in_generate=True,
         output_scores=True,
         enable_timing=False,
@@ -79,12 +79,9 @@ else:
     )
 out = fn()
 if args.prompt is not None:
-    print(tokenizer.batch_decode(out.sequences.tolist()))
+    for x in tokenizer.batch_decode(out.sequences.tolist()):
+        print(x)
 
-torch.cuda.synchronize()
 start = time.time()
-for _ in range(repeats):
-    fn()
-torch.cuda.synchronize()
 print(f"Prompt length: {len(input_ids[0])}, generation length: {len(out.sequences[0]) - len(input_ids[0])}")
 print(f"{args.model_name} prompt processing + decoding time: {(time.time() - start) / repeats * 1000:.0f}ms")
