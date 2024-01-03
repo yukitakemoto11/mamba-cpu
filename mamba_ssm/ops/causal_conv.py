@@ -52,7 +52,7 @@ def causal_conv1d_fn(x, weight, bias=None, activation=None):
     return (out if activation is None else F.silu(out)).to(dtype=dtype_in)
 
 
-def causal_conv1d_update_fn(x, conv_state, weight, bias=None, activation=None):
+def causal_conv1d_update(x, conv_state, weight, bias=None, activation=None):
     """
     x: (batch, dim)
     conv_state: (batch, dim, width)
