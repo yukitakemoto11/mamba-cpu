@@ -27,7 +27,7 @@ parser.add_argument("--batch", type=int, default=1)
 args = parser.parse_args()
 
 repeats = 3
-device = "cuda"
+device = "cpu"
 dtype = torch.float16
 
 print(f"Loading model {args.model_name}")
