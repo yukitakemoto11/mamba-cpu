@@ -1,4 +1,6 @@
-# Mamba
+# Mamba for CPU
+
+This is a fork of Mamba that doesn't depend on GPU components.
 
 ![Mamba](assets/selection.png "Selective State Space")
 > **Mamba: Linear-Time Sequence Modeling with Selective State Spaces**\
