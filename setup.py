@@ -32,7 +32,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 # ninja build does not work unless include_dirs are abs path
 this_dir = os.path.dirname(os.path.abspath(__file__))
 
-PACKAGE_NAME = "mamba_ssm_cpu"
+PACKAGE_NAME = "mamba_ssm"
 
 BASE_WHEEL_URL = "https://github.com/state-spaces/mamba/releases/download/{tag_name}/{wheel_name}"
 
@@ -232,7 +232,7 @@ class CachedWheelsCommand(_bdist_wheel):
 
 
 setup(
-    name=PACKAGE_NAME,
+    name=f"{PACKAGE_NAME}_cpu",
     version=get_package_version(),
     packages=find_packages(
         exclude=(
