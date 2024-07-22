@@ -232,7 +232,7 @@ class CachedWheelsCommand(_bdist_wheel):
 
 
 setup(
-    name=f"{PACKAGE_NAME}_cpu",
+    name=PACKAGE_NAME,
     version=get_package_version(),
     packages=find_packages(
         exclude=(
