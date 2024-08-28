@@ -175,8 +175,10 @@ def get_wheel_url():
     # Determine the version numbers that will be used to determine the correct wheel
     # We're using the CUDA version used to build torch, not the one currently installed
     # _, cuda_version_raw = get_cuda_bare_metal_version(CUDA_HOME)
-    torch_cuda_version = parse(torch.version.cuda)
-    torch_version_raw = parse(torch.__version__)
+    #torch_cuda_version = parse(torch.version.cuda)
+    torch_cuda_version = "12.1"
+    #torch_version_raw = parse(torch.__version__)
+    torch_version_raw = "2.4.0+cu121"
     # For CUDA 11, we only compile for CUDA 11.8, and for CUDA 12 we only compile for CUDA 12.2
     # to save CI time. Minor versions should be compatible.
     torch_cuda_version = parse("11.8") if torch_cuda_version.major == 11 else parse("12.2")
